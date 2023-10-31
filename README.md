@@ -32,12 +32,28 @@ This project demonstrates the integration of a weather forecast API from RapidAP
           curl -X GET "http://localhost:8080/admin/register-client/YourClientId"
           ```
 
+3. **Client Registration:**
+    - Register your client ID using the `/admin/register-client/{client-id}` API. It will generate the client secret for you. Use the following curl command for registration:
+      ```bash
+      curl --location 'http://localhost:8080/admin/register-client/{client-id}' \
+      --header 'X-Client-Id: {client-id}' \
+      --header 'X-Client-Secret: {client-secret}'
+      ```
+
+4. **Authentication for Weather Forecast API:**
+    - After successful registration, use the client ID as the value for X-Client-Id and the generated client secret as the value for X-Client-Secret in the following curl command to access the weather forecast API:
+      ```bash
+      curl --location 'http://localhost:8080/weather/hourly?locationName=delhi' \
+      --header 'X-Client-Id: {client-id}' \
+      --header 'X-Client-Secret: {client-secret}'
+      ```
+
 ## Authentication
 
 - Header-based authentication is required for accessing the weather forecast endpoints.
 - Include the following headers in your request:
-    - `X-Client-Id`: Your client ID
-    - `X-Client-Secret`: Your client secret
+    - `X-Client-Id`: Your Client ID
+    - `X-Client-Secret`: Your Client Secret
 
 ## Service Class
 
@@ -47,5 +63,4 @@ For administrative purposes, a client can be registered using the `/admin/regist
 
 ## Logging
 
-The application uses SLF4J for logging. Logs are available for authentication status and client registration.
-
+Developers can utilize the SLF4J logging framework to gather information by leveraging the logger. Logs are accessible for tracking authentication status and client registration.
